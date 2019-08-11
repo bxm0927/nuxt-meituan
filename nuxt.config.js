@@ -1,6 +1,20 @@
+/*
+ * Nuxt Configuration File
+ * @Author: xiaoming.bai
+ * @Date: 2019-08-10 16:04:54
+ * @Last Modified by: xiaoming.bai
+ * @Last Modified time: 2019-08-11 15:36:38
+ */
+
+const config = require('./config')
 
 module.exports = {
   mode: 'universal',
+  server: {
+    port: config.server.port, // default: 3000
+    host: config.server.host, // default: localhost
+  },
+
   /*
   ** Headers of the page
   */

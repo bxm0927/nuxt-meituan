@@ -1,3 +1,11 @@
+/*
+ * Server-side Entry File
+ * @Author: xiaoming.bai
+ * @Date: 2019-08-10 16:07:14
+ * @Last Modified by: xiaoming.bai
+ * @Last Modified time: 2019-08-11 12:17:01
+ */
+
 const Koa = require('koa')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
@@ -5,12 +13,12 @@ const { Nuxt, Builder } = require('nuxt')
 const app = new Koa()
 
 // Import and Set Nuxt.js options
-const config = require('../nuxt.config.js')
-config.dev = app.env !== 'production'
+const nuxtConfig = require('../nuxt.config.js')
+nuxtConfig.dev = app.env !== 'production'
 
 async function start () {
   // Instantiate nuxt.js
-  const nuxt = new Nuxt(config)
+  const nuxt = new Nuxt(nuxtConfig)
 
   const {
     host = process.env.HOST || '127.0.0.1',
@@ -18,7 +26,7 @@ async function start () {
   } = nuxt.options.server
 
   // Build in development
-  if (config.dev) {
+  if (nuxtConfig.dev) {
     const builder = new Builder(nuxt)
     await builder.build()
   } else {

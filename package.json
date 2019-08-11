@@ -2,8 +2,12 @@
   "name": "nuxt-meituan",
   "version": "1.0.0",
   "description": "My stunning Nuxt.js project",
-  "author": "bxm0927",
+  "author": "bxm0927 <80583600@qq.com>",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bxm0927/nuxt-meituan.git"
+  },
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
     "build": "nuxt build",
