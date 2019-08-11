@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-10 16:04:54
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-11 15:36:38
+ * @Last Modified time: 2019-08-11 18:35:16
  */
 
 const config = require('./config')
@@ -29,22 +29,28 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+
   /*
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
+
   /*
   ** Global CSS
   */
   css: [
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/reset.css',
+    'element-ui/lib/theme-chalk/index.css',
+    // '~assets/stylesheets/main.css',
   ],
+
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
     '@/plugins/element-ui'
   ],
+
   /*
   ** Nuxt.js dev-modules
   */
@@ -52,6 +58,7 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module'
   ],
+
   /*
   ** Nuxt.js modules
   */
@@ -59,12 +66,14 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios'
   ],
+
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
   },
+
   /*
   ** Build configuration
   */
@@ -74,6 +83,15 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+      // Run ESLint on save
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: "pre",
+          test: /\.(js|vue)$/,
+          loader: "eslint-loader",
+          exclude: /(node_modules)/
+        })
+      }
     }
   }
 }
