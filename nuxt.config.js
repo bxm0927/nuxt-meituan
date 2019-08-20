@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-10 16:04:54
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-11 18:35:16
+ * @Last Modified time: 2019-08-20 22:25:49
  */
 
 const config = require('./config')
@@ -41,7 +41,7 @@ module.exports = {
   css: [
     'element-ui/lib/theme-chalk/reset.css',
     'element-ui/lib/theme-chalk/index.css',
-    // '~assets/stylesheets/main.css',
+    '@/assets/stylesheets/main.css',
   ],
 
   /*

@@ -1,72 +1,37 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        nuxt-meituan
-      </h1>
-      <h2 class="subtitle">
-        My stunning Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+  <div class="page-index">
+    <el-row>
+      <el-col :span="5">
+        <MyMenu />
+      </el-col>
+
+      <el-col :span="19">
+        <MyLife />
+      </el-col>
+    </el-row>
+
+    <el-row>
+      <el-col :span="24">
+        <!-- <MyArtistic /> -->
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import MyMenu from '@/components/index/menu.vue'
+import MyLife from '@/components/index/life.vue'
+// import MyArtistic from '@/components/index/artistic.vue'
 
 export default {
   components: {
-    Logo
-  }
+    MyMenu,
+    MyLife,
+    // MyArtistic,
+  },
 }
 </script>
 
-<style lang="scss" scoped>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
+<style lang="scss">
+@import '@/assets/stylesheets/index/index.scss';
 </style>
