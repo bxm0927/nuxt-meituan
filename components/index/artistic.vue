@@ -2,15 +2,15 @@
   <section class="m-istyle">
     <dl @mouseover="over">
       <dt>有格调</dt>
-      <dd :class="{ active:kind === 'all' }" keyword="景点" kind="all">全部</dd>
-      <dd :class="{ active:kind === 'part' }" keyword="美食" kind="part">约会聚餐</dd>
-      <dd :class="{ active:kind === 'spa' }" keyword="丽人" kind="spa">丽人SPA</dd>
-      <dd :class="{ active:kind === 'movie' }" keyword="电影" kind="movie">电影演出</dd>
-      <dd :class="{ active:kind === 'travel' }" keyword="旅游" kind="travel">品质出游</dd>
+      <dd :class="{ active: kind === 'all' }" keyword="景点" kind="all">全部</dd>
+      <dd :class="{ active: kind === 'part' }" keyword="美食" kind="part">约会聚餐</dd>
+      <dd :class="{ active: kind === 'spa' }" keyword="丽人" kind="spa">丽人SPA</dd>
+      <dd :class="{ active: kind === 'movie' }" keyword="电影" kind="movie">电影演出</dd>
+      <dd :class="{ active: kind === 'travel' }" keyword="旅游" kind="travel">品质出游</dd>
     </dl>
 
     <ul class="ibody">
-      <li :key="item.title" v-for="item in cur">
+      <li :key="item.title" v-for="item in curKindLint">
         <el-card :body-style="{ padding: '0px' }" shadow="never">
           <img :src="item.img" class="image" />
           <ul class="cbody">
@@ -35,6 +35,7 @@ export default {
   data: () => {
     return {
       kind: 'all',
+      keyword: '景点',
       list: {
         all: [],
         part: [],
@@ -45,74 +46,51 @@ export default {
     }
   },
   computed: {
-    cur() {
-      return this.list[this.kind]
+    curKindLint() {
+      return this.list[this.kind] || []
     },
   },
-  async mounted() {
-    const {
-      status,
-      data: { count, pois },
-    } = await this.$axios.get('/search/resultsByKeywords', {
-      params: {
-        keyword: '景点',
-        city: this.$store.state.geo.position.city,
-      },
-    })
-
-    if (status === 200 && count > 0) {
-      const r = pois
-        .filter(item => item.photos.length)
-        .map(item => {
-          return {
-            title: item.name,
-            pos: item.type.split(';')[0],
-            price: item.biz_ext.cost || '暂无',
-            img: item.photos[0].url,
-            url: '//abc.com',
-          }
-        })
-
-      this.list[this.kind] = r.slice(0, 9)
-    } else {
-      this.list[this.kind] = []
-    }
+  mounted() {
+    // this.initData()
   },
   methods: {
-    async over(e) {
+    async initData() {
+      const {
+        status,
+        data: { count, pois },
+      } = await this.$axios.get('/search/resultsByKeywords', {
+        params: {
+          keyword: this.keyword,
+          city: this.$store.state.geo.position.city,
+        },
+      })
+
+      if (status === 200 && count > 0) {
+        const r = pois
+          .filter(item => item.photos.length)
+          .map(item => {
+            return {
+              title: item.name,
+              pos: item.type.split(';')[0],
+              price: item.biz_ext.cost || '暂无',
+              img: item.photos[0].url,
+              url: '//abc.com',
+            }
+          })
+        this.list[this.kind] = r.slice(0, 9)
+      } else {
+        this.list[this.kind] = []
+      }
+    },
+    over(e) {
       const dom = e.target
       const tag = dom.tagName.toLowerCase()
 
-      if (tag === 'dd') {
-        this.kind = dom.getAttribute('kind')
-        const keyword = dom.getAttribute('keyword')
-        const {
-          status,
-          data: { count, pois },
-        } = await this.$axios.get('/search/resultsByKeywords', {
-          params: {
-            keyword,
-            city: this.$store.state.geo.position.city,
-          },
-        })
+      if (tag !== 'dd') return
 
-        if (status === 200 && count > 0) {
-          const r = pois
-            .filter(item => item.photos.length)
-            .map(item => {
-              return {
-                title: item.name,
-                pos: item.type.split(';')[0],
-                price: item.biz_ext.cost || '暂无',
-                img: item.photos[0].url,
-                url: '//abc.com',
-              }
-            })
-          this.list[this.kind] = r.slice(0, 9)
-        } else {
-          this.list[this.kind] = []
-        }
-      }
+      this.kind = dom.getAttribute('kind')
+      this.keyword = dom.getAttribute('keyword')
+      // this.initData()
     },
   },
 }

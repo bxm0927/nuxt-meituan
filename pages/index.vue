@@ -12,7 +12,7 @@
 
     <el-row>
       <el-col :span="24">
-        <!-- <MyArtistic /> -->
+        <MyArtistic />
       </el-col>
     </el-row>
   </div>
@@ -21,13 +21,13 @@
 <script>
 import MyMenu from '@/components/index/menu.vue'
 import MyLife from '@/components/index/life.vue'
-// import MyArtistic from '@/components/index/artistic.vue'
+import MyArtistic from '@/components/index/artistic.vue'
 
 export default {
   components: {
     MyMenu,
     MyLife,
-    // MyArtistic,
+    MyArtistic,
   },
 }
 </script>

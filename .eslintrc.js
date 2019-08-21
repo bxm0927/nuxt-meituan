@@ -16,6 +16,7 @@ module.exports = {
     'vue/html-self-closing': 'off',
     'arrow-parens': 'off', // 箭头函数参数括号
     'comma-dangle': 'off', // 尾逗号
+    'curly': 'off', // 当一个块只包含一条语句时，省略花括号
     'space-before-function-paren': 'off', // function 括号前缺少空格
   },
 }
