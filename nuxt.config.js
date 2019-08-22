@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-10 16:04:54
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-20 22:25:49
+ * @Last Modified time: 2019-08-22 17:49:14
  */
 
 const config = require('./config')
@@ -54,7 +54,7 @@ module.exports = {
   /*
   ** Nuxt.js dev-modules
   */
-  devModules: [
+  buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module'
   ],
