@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-11 12:08:27
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-24 00:59:50
+ * @Last Modified time: 2019-08-24 01:01:09
  */
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
   server: {
     port: 3000,
     // host: '0.0.0.0',
-    host: 'http://45.32.199.116',
+    host: '45.32.199.116',
   },
 
   // MongoDB
