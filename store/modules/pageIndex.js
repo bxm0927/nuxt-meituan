@@ -24,7 +24,7 @@ export const actions = {
   },
   async getHotPlace({ commit, rootState }) {
     const city =
-      rootState.position.city || rootState.position.city !== []
+      rootState.position.city && rootState.position.city !== []
         ? rootState.position.city.replace('市', '')
         : ''
 
