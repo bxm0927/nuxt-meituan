@@ -7,13 +7,27 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
+  data() {
+    return {
+      position: null, // 地理定位
+    }
+  },
   computed: {
-    ...mapState(['position']),
     cityName() {
       return this.position ? this.position.city : ''
+    },
+  },
+  mounted() {
+    this.getPosition()
+  },
+  methods: {
+    async getPosition() {
+      const { status, data } = await this.$axios.get('/geo/getPosition')
+
+      if (status === 200 && data && data.code === 0) {
+        this.position = data.data
+      }
     },
   },
 }

@@ -7,30 +7,15 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-24 19:03:43
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-24 21:00:29
+ * @Last Modified time: 2019-08-24 23:24:16
  */
 
 export const state = () => ({
   test: 'hello root store!',
-
-  position: null, // 地理定位
 })
 
-export const mutations = {
-  setPosition(state, payload) {
-    return (state.position = payload)
-  },
-}
+export const mutations = {}
 
 export const actions = {
-  async nuxtServerInit({ commit, dispatch }, context) {
-    await dispatch('getPosition')
-  },
-  async getPosition({ commit }) {
-    const { status, data } = await this.$axios.get('/geo/getPosition')
-
-    if (status === 200 && data && data.code === 0) {
-      commit('setPosition', data.data)
-    }
-  },
+  async nuxtServerInit({ commit, dispatch }, context) {},
 }
