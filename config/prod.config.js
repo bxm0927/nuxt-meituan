@@ -3,19 +3,18 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-11 12:08:27
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-24 01:01:09
+ * @Last Modified time: 2019-08-24 01:15:39
  */
 
 module.exports = {
   mode: 'production',
   server: {
     port: 3000,
-    // host: '0.0.0.0',
     host: '45.32.199.116',
   },
 
   // MongoDB
-  dbs: 'mongodb://127.0.0.1:27017',
+  dbs: 'mongodb://127.0.0.1:27017/meituan',
 
   // Redis
   redis: {
