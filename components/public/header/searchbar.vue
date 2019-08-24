@@ -20,26 +20,24 @@
 
           <dl class="hotPlace" v-if="isHotPlace">
             <dt>热门搜索</dt>
-            <!-- <dd :key="index" v-for="(item, index) in $store.state.home.hotPlace.slice(0, 5)"> -->
-            <dd :key="index" v-for="(item, index) in hotPlace">
-              <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item }}</a>
+            <dd :key="index" v-for="(item, index) in hotPlace.slice(0, 5)">
+              <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
             </dd>
           </dl>
 
           <dl class="searchList" v-if="isSearchList">
             <dd :key="index" v-for="(item, index) in searchList">
-              <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item }}</a>
+              <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
             </dd>
           </dl>
         </div>
 
         <p class="suggest">
-          <!-- v-for="(item, index) in $store.state.home.hotPlace.slice(0, 5)" -->
           <a
             :href="'/products?keyword='+encodeURIComponent(item.name)"
             :key="index"
-            v-for="(item,index) in hotPlace"
-          >{{ item }}</a>
+            v-for="(item, index) in hotPlace"
+          >{{ item.name }}</a>
         </p>
 
         <ul class="nav">
@@ -82,7 +80,7 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 import _Debounce from 'lodash/debounce'
 
 export default {
@@ -90,12 +88,12 @@ export default {
     return {
       isFocus: false,
       search: '',
-      hotPlace: ['天安门1', '天安门2', '天安门3', '天安门4'],
-      searchList: ['火锅', '火锅', '火锅', '火锅', '火锅'],
+      searchList: [],
     }
   },
   computed: {
-    // ...mapState('modules/pageIndex', ['hotPlace']),
+    ...mapState(['position']),
+    ...mapState('modules/pageIndex', ['hotPlace']),
     isHotPlace() {
       // 聚焦状态下，没输入内容
       return this.isFocus && !this.search
@@ -115,22 +113,21 @@ export default {
     focus() {
       this.isFocus = true
     },
-    input: _Debounce(async () => {
-      const city = this.$store.state.geo.position.city.replace('市', '')
-      this.searchList = []
+    input: _Debounce(async function() {
+      let { city = '' } = this.position
+      city = city.replace('市', '')
 
-      const { data } = await this.$axios.get('/search/top', {
+      const { status, data } = await this.$axios.get('/search/top', {
         params: {
           input: this.search,
           city,
         },
       })
 
-      this.searchList = data.top.slice(0, 10)
-    }, 300),
+      if (status === 200) {
+        this.searchList = data.data.slice(0, 10)
+      }
+    }, 200),
   },
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

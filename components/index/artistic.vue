@@ -13,6 +13,7 @@
       <li :key="item.title" v-for="item in curKindLint">
         <el-card :body-style="{ padding: '0px' }" shadow="never">
           <img :src="item.img" class="image" />
+
           <ul class="cbody">
             <li class="title">{{ item.title }}</li>
             <li class="pos">
@@ -31,6 +32,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import _Debounce from 'lodash/debounce'
+
 export default {
   data: () => {
     return {
@@ -46,27 +50,29 @@ export default {
     }
   },
   computed: {
+    ...mapState(['position']),
     curKindLint() {
       return this.list[this.kind] || []
     },
   },
   mounted() {
-    // this.initData()
+    this.initData()
   },
   methods: {
     async initData() {
-      const {
-        status,
-        data: { count, pois },
-      } = await this.$axios.get('/search/resultsByKeywords', {
+      let { city = '' } = this.position
+      city = city.replace('市', '')
+
+      const { status, data } = await this.$axios.get('/search/resultsByKeywords', {
         params: {
+          city,
           keyword: this.keyword,
-          city: this.$store.state.geo.position.city,
         },
       })
 
-      if (status === 200 && count > 0) {
-        const r = pois
+      if (status === 200 && data.data.count > 0) {
+        const result = data.data.pois
+          // 不要没有图片的数据
           .filter(item => item.photos.length)
           .map(item => {
             return {
@@ -77,12 +83,13 @@ export default {
               url: '//abc.com',
             }
           })
-        this.list[this.kind] = r.slice(0, 9)
+
+        this.list[this.kind] = result.slice(0, 9)
       } else {
         this.list[this.kind] = []
       }
     },
-    over(e) {
+    over: _Debounce(function(e) {
       const dom = e.target
       const tag = dom.tagName.toLowerCase()
 
@@ -90,8 +97,8 @@ export default {
 
       this.kind = dom.getAttribute('kind')
       this.keyword = dom.getAttribute('keyword')
-      // this.initData()
-    },
+      this.initData()
+    }, 200),
   },
 }
 </script>

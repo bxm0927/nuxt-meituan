@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-21 23:55:54
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-24 14:12:20
+ * @Last Modified time: 2019-08-25 00:34:08
  */
 
 const Router = require('koa-router')
@@ -13,7 +13,7 @@ const router = new Router({
   prefix: '/search',
 })
 
-//
+// 根据搜索关键字实时推荐
 router.get('/top', searchService.top())
 
 // 根据关键词搜索

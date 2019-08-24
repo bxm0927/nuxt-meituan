@@ -1,7 +1,7 @@
 const axios = require('../utils/axios')
 const citiesModel = require('../models/cities')
 const menusModel = require('../models/menus')
-// const provincesModel = require('../models/provinces')
+const provincesModel = require('../models/provinces')
 
 const getPosition = () => {
   return async (ctx, next) => {

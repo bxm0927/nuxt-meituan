@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-22 17:32:04
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-24 01:13:33
+ * @Last Modified time: 2019-08-25 01:22:05
  */
 
 const axios = require('axios')
@@ -12,7 +12,7 @@ const { host, port } = config.server
 
 const instance = axios.create({
   baseURL: `http://${host}:${port}`,
-  timeout: 2000,
+  timeout: 10000,
   headers: {},
 })
 

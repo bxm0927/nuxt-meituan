@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-10 16:07:14
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-24 18:22:10
+ * @Last Modified time: 2019-08-25 00:39:00
  */
 
 const Koa = require('koa')
@@ -59,8 +59,10 @@ async function start() {
   // Routes
   const userRouter = require('./routes/users')
   const geoRouter = require('./routes/geo')
+  const searchRouter = require('./routes/search')
   app.use(userRouter.routes(), userRouter.allowedMethods())
   app.use(geoRouter.routes(), geoRouter.allowedMethods())
+  app.use(searchRouter.routes(), searchRouter.allowedMethods())
 
   app.use(ctx => {
     ctx.status = 200

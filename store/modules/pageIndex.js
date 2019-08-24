@@ -22,8 +22,13 @@ export const actions = {
       commit('setMenu', data.data || [])
     }
   },
-  async getHotPlace({ commit }) {
-    const { status, data } = await this.$axios.get('/search/hotPlace')
+  async getHotPlace({ commit, rootState }) {
+    let { city = '' } = rootState.position
+    city = city.replace('市', '')
+
+    const { status, data } = await this.$axios.get('/search/hotPlace', {
+      params: { city },
+    })
 
     if (status === 200 && data.code === 0) {
       commit('setHotPlace', data.data || [])
