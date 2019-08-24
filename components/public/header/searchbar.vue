@@ -114,8 +114,8 @@ export default {
       this.isFocus = true
     },
     input: _Debounce(async function() {
-      let { city = '' } = this.position
-      city = city.replace('市', '')
+      const city =
+        this.position.city || this.position.city !== [] ? this.position.city.replace('市', '') : ''
 
       const { status, data } = await this.$axios.get('/search/top', {
         params: {

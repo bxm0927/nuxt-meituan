@@ -60,8 +60,8 @@ export default {
   },
   methods: {
     async initData() {
-      let { city = '' } = this.position
-      city = city.replace('市', '')
+      const city =
+        this.position.city || this.position.city !== [] ? this.position.city.replace('市', '') : ''
 
       const { status, data } = await this.$axios.get('/search/resultsByKeywords', {
         params: {
