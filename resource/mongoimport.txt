@@ -1,0 +1,11 @@
+导如入数据到 MongoDB：
+
+mongoimport -d meituan -c areas resource/dbs/areas.dat
+mongoimport -d meituan -c category resource/dbs/category.dat
+mongoimport -d meituan -c cities resource/dbs/cities.dat
+mongoimport -d meituan -c maps resource/dbs/maps.dat
+mongoimport -d meituan -c menus resource/dbs/menus.dat
+mongoimport -d meituan -c pois resource/dbs/pois.dat
+mongoimport -d meituan -c provinces resource/dbs/provinces.dat
+mongoimport -d meituan -c regions resource/dbs/regions.dat
+mongoimport -d meituan -c topsearches resource/dbs/topsearches.dat

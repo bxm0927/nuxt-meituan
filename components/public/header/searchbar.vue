@@ -82,6 +82,7 @@
 </template>
 
 <script>
+// import { mapState } from 'vuex'
 import _Debounce from 'lodash/debounce'
 
 export default {
@@ -94,6 +95,7 @@ export default {
     }
   },
   computed: {
+    // ...mapState('modules/pageIndex', ['hotPlace']),
     isHotPlace() {
       // 聚焦状态下，没输入内容
       return this.isFocus && !this.search

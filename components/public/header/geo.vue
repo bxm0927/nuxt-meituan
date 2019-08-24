@@ -1,13 +1,20 @@
 <template>
   <div class="m-geo">
-    <i class="el-icon-location" /> 北京市
+    <i class="el-icon-location" />
+    {{ cityName }}
     <nuxt-link class="changeCity" to="/changeCity">切换城市</nuxt-link>[香河 廊坊 天津]
   </div>
 </template>
 
 <script>
-export default {}
-</script>
+import { mapState } from 'vuex'
 
-<style lang="scss" scoped>
-</style>
+export default {
+  computed: {
+    ...mapState(['position']),
+    cityName() {
+      return this.position ? this.position.city : ''
+    },
+  },
+}
+</script>

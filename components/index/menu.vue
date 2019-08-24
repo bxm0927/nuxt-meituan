@@ -20,39 +20,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data() {
     return {
       timer: null,
       kind: '',
-      menu: [
-        {
-          type: 'food',
-          name: '美食',
-          child: [{ title: '美食', child: ['代金券', '甜点饮品', '火锅', '自助餐', '小吃快餐'] }],
-        },
-        {
-          type: 'takeout',
-          name: '外卖',
-          child: [{ title: '外卖', child: ['美团外卖'] }],
-        },
-        {
-          type: 'hotel',
-          name: '酒店',
-          child: [
-            { title: '酒店星级1', child: ['经济型1', '舒适/三星1', '高档/四星1', '豪华/五星1'] },
-            { title: '酒店星级2', child: ['经济型2', '舒适/三星2', '高档/四星2', '豪华/五星2'] },
-            { title: '酒店星级3', child: ['经济型3', '舒适/三星3', '高档/四星3', '豪华/五星3'] },
-            { title: '酒店星级4', child: ['经济型4', '舒适/三星4', '高档/四星4', '豪华/五星4'] },
-          ],
-        },
-      ],
     }
   },
   computed: {
+    ...mapState('modules/pageIndex', ['menu']),
     curDetail() {
-      return this.menu.filter(item => item.type === this.kind)[0]
-      // return this.$store.state.home.menu.filter(item => item.type === this.kind)[0]
+      return this.menu && this.menu.filter(item => item.type === this.kind)[0]
     },
   },
   methods: {

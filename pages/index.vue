@@ -29,6 +29,10 @@ export default {
     MyLife,
     MyArtistic,
   },
+  async fetch({ store, params }) {
+    await store.dispatch('modules/pageIndex/getMenu')
+    // await store.dispatch('modules/pageIndex/getHotPlace')
+  },
 }
 </script>
 
