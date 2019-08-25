@@ -16,6 +16,29 @@ const top = () => {
     } else {
       ctx.body = { code: 0, data: null, msg: '' }
     }
+
+    // try {
+    //   let top = await poisModel.find({
+    //     name: new RegExp(input),
+    //     city: city,
+    //   })
+
+    //   ctx.body = {
+    //     code: 0,
+    //     top: top.map(item => {
+    //       return {
+    //         name: item.name,
+    //         type: item.type,
+    //       }
+    //     }),
+    //     type: top.length ? top[0].type : '',
+    //   }
+    // } catch (e) {
+    //   ctx.body = {
+    //     code: -1,
+    //     top: [],
+    //   }
+    // }
   }
 }
 
@@ -49,6 +72,25 @@ const hotplace = () => {
     } else {
       ctx.body = { code: 0, data: null, msg: '' }
     }
+
+    // try {
+    //   let result = await poisModel.find({ city }).limit(10)
+
+    //   ctx.body = {
+    //     code: 0,
+    //     result: result.map(item => {
+    //       return {
+    //         name: item.name,
+    //         type: item.type,
+    //       }
+    //     }),
+    //   }
+    // } catch (e) {
+    //   ctx.body = {
+    //     code: -1,
+    //     result: [],
+    //   }
+    // }
   }
 }
 
