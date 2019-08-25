@@ -25,5 +25,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/stylesheets/changeCity/hot.scss';
+@import '@/assets/stylesheets/changecity/hot.scss';
 </style>
