@@ -7,7 +7,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-24 19:03:43
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-25 01:21:04
+ * @Last Modified time: 2019-08-25 11:49:54
  */
 
 export const state = () => ({
@@ -29,7 +29,10 @@ export const actions = {
     const { status, data } = await this.$axios.get('/geo/getPosition')
 
     if (status === 200 && data && data.code === 0) {
-      commit('setPosition', data.data)
+      const hasCity = data.data.city && !Array.isArray(data.data.city)
+      const shortCity = hasCity ? data.data.city.replace('市', '') : ''
+
+      commit('setPosition', { shortCity, ...data.data })
     }
   },
 }
