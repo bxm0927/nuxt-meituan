@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-10 16:04:54
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-25 12:28:07
+ * @Last Modified time: 2019-08-25 12:49:09
  */
 
 const config = require('./config')
@@ -29,7 +29,7 @@ module.exports = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#ff0000' },
 
   /*
    ** Global CSS
