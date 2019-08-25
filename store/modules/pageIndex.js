@@ -23,13 +23,10 @@ export const actions = {
     }
   },
   async getHotPlace({ commit, rootState }) {
-    const city =
-      rootState.position.city && rootState.position.city !== []
-        ? rootState.position.city.replace('市', '')
-        : ''
-
     const { status, data } = await this.$axios.get('/search/hotPlace', {
-      params: { city },
+      params: {
+        city: rootState.position.shortCity,
+      },
     })
 
     if (status === 200 && data.code === 0) {

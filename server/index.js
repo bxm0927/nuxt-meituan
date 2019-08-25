@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-10 16:07:14
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-25 00:39:00
+ * @Last Modified time: 2019-08-25 12:17:40
  */
 
 const Koa = require('koa')
@@ -34,6 +34,14 @@ app.use(bodyParser({ extendTypes: ['json', 'form', 'text'] }))
 app.use(json())
 app.use(passport.initialize())
 app.use(passport.session())
+
+// logger
+app.use(async (ctx, next) => {
+  const start = new Date()
+  await next()
+  const ms = new Date() - start
+  console.log(`${ctx.method} [${ms}ms] ${ctx.url}`)
+})
 
 // Import and Set Nuxt.js options
 const nuxtConfig = require('../nuxt.config.js')
