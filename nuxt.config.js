@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-10 16:04:54
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-24 00:43:48
+ * @Last Modified time: 2019-08-25 12:28:07
  */
 
 const config = require('./config')
@@ -73,6 +73,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
+    extractCSS: config.mode === 'production',
     transpile: [/^element-ui/],
     /*
      ** You can extend webpack config here
