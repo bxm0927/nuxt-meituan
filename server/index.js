@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-10 16:07:14
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-25 12:17:40
+ * @Last Modified time: 2019-08-29 00:53:04
  */
 
 const Koa = require('koa')
@@ -39,8 +39,9 @@ app.use(passport.session())
 app.use(async (ctx, next) => {
   const start = new Date()
   await next()
-  const ms = new Date() - start
-  console.log(`${ctx.method} [${ms}ms] ${ctx.url}`)
+  const end = new Date()
+  const duration = end - start
+  console.log(`${end.toLocaleDateString()} ${end.toLocaleTimeString()} [${duration}ms] ${ctx.method} ${ctx.url}`)
 })
 
 // Import and Set Nuxt.js options
@@ -65,12 +66,7 @@ async function start() {
   }
 
   // Routes
-  const userRouter = require('./routes/users')
-  const geoRouter = require('./routes/geo')
-  const searchRouter = require('./routes/search')
-  app.use(userRouter.routes(), userRouter.allowedMethods())
-  app.use(geoRouter.routes(), geoRouter.allowedMethods())
-  app.use(searchRouter.routes(), searchRouter.allowedMethods())
+  require('./routes')(app)
 
   app.use(ctx => {
     ctx.status = 200

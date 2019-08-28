@@ -104,3 +104,8 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 服务器：CentOS 7.3 64bit
 
 安装 Git、Node.js、NPM、Yarn、Nuxt
+
+
+## Q&A
+
+本地数据库提供有限，所以很多接口都是调用线上服务

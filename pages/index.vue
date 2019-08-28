@@ -31,8 +31,8 @@ export default {
   },
   async fetch({ store }) {
     await Promise.all([
+      store.dispatch('getHotPlace'),
       store.dispatch('modules/pageIndex/getMenu'),
-      store.dispatch('modules/pageIndex/getHotPlace'),
     ])
   },
 }

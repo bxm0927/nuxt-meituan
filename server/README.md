@@ -4,7 +4,7 @@ Server-side directory
 
 - routes: Control layer, invoking service
 - service: Service Layer, for Control Layer Call
-- models: mongoose model & Schema
+- models: mongoose model & Schema. (File names need to correspond to collection names)
 
 Test routes:
 

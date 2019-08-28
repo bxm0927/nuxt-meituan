@@ -7,17 +7,20 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-24 19:03:43
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-25 13:45:49
+ * @Last Modified time: 2019-08-29 02:19:00
  */
 
 export const state = () => ({
-  test: 'hello root store!',
   position: null, // 地理定位
+  hotPlace: [], // 热门搜索
 })
 
 export const mutations = {
   setPosition(state, payload) {
     state.position = payload
+  },
+  setHotPlace(state, payload) {
+    state.hotPlace = payload
   },
 }
 
@@ -38,6 +41,17 @@ export const actions = {
         shortCity: has(city) ? city.replace('市', '') : '上海',
         ip,
       })
+    }
+  },
+  async getHotPlace({ commit, rootState }) {
+    const { status, data } = await this.$axios.get('/search/hotPlace', {
+      params: {
+        city: rootState.position.shortCity,
+      },
+    })
+
+    if (status === 200 && data.code === 0) {
+      commit('setHotPlace', data.data || [])
     }
   },
 }

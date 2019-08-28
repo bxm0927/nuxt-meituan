@@ -2,7 +2,12 @@
   <div class="search-panel">
     <el-row class="m-header-searchbar">
       <el-col :span="3" class="left">
-        <img alt="美团" src="//s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/logo.png" />
+        <a href="/">
+          <img
+            alt="美团"
+            src="//s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/logo.png"
+          />
+        </a>
       </el-col>
 
       <el-col :span="15" class="center">
@@ -21,13 +26,17 @@
           <dl class="hotPlace" v-if="isHotPlace">
             <dt>热门搜索</dt>
             <dd :key="index" v-for="(item, index) in hotPlace.slice(0, 5)">
-              <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
+              <a
+                :href="'/products?keyword='+encodeURIComponent(item.name)"
+              >{{ item.name }}</a>
             </dd>
           </dl>
 
           <dl class="searchList" v-if="isSearchList">
             <dd :key="index" v-for="(item, index) in searchList">
-              <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
+              <a
+                :href="'/products?keyword='+encodeURIComponent(item.name)"
+              >{{ item.name }}</a>
             </dd>
           </dl>
         </div>
@@ -92,8 +101,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['position']),
-    ...mapState('modules/pageIndex', ['hotPlace']),
+    ...mapState(['position', 'hotPlace']),
     isHotPlace() {
       // 聚焦状态下，没输入内容
       return this.isFocus && !this.search

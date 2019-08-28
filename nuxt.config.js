@@ -3,24 +3,39 @@
  * @Author: xiaoming.bai
  * @Date: 2019-08-10 16:04:54
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2019-08-25 12:49:09
+ * @Last Modified time: 2019-08-27 21:14:43
  */
 
 const config = require('./config')
-const { host, port } = config.server
+const {
+  mode,
+  server: { host, port },
+} = config
 
 module.exports = {
   mode: 'universal',
+  // modern: mode === 'production' ? false : 'client',
   server: { host, port },
 
   /*
-   ** Headers of the page
+   * Headers of the page
+   * vue-meta Doc: https://github.com/nuxt/vue-meta
    */
   head: {
+    htmlAttrs: { lang: 'zh' },
     title: '美团网',
     meta: [
+      // Renderer
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'renderer', content: 'webkit' },
+      { name: 'force-rendering', content: 'webkit' },
+      { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge,chrome=1' },
+      { name: 'theme-color', content: '#13d1be' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
+
+      // SEO
+      { name: 'author', content: 'xiaoming.bai' },
+      { hid: 'keywords', name: 'keywords', content: 'HTML,CSS,JS,Vue,Nuxt.js' },
       { hid: 'description', name: 'description', content: '高仿美团网 PC 网页版' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
@@ -73,7 +88,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    extractCSS: config.mode === 'production',
+    extractCSS: mode === 'production',
     transpile: [/^element-ui/],
     /*
      ** You can extend webpack config here
