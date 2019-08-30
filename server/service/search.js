@@ -14,7 +14,7 @@ const top = () => {
     if (status === 200) {
       ctx.body = { code: 0, data: top, msg: '' }
     } else {
-      ctx.body = { code: 0, data: null, msg: '' }
+      ctx.body = { code: -1, data: null, msg: '' }
     }
 
     // try {
@@ -45,14 +45,15 @@ const top = () => {
 const resultsByKeywords = () => {
   return async (ctx, next) => {
     const { city, keyword } = ctx.query
-    const { status, data } = await axios.get('http://cp-tools.cn/search/resultsByKeywords', {
+    const api = 'http://cp-tools.cn/search/resultsByKeywords'
+    const { status, data } = await axios.get(api, {
       params: { city, keyword },
     })
 
     if (status === 200) {
       ctx.body = { code: 0, data, msg: '' }
     } else {
-      ctx.body = { code: 0, data: null, msg: '' }
+      ctx.body = { code: -1, data: null, msg: '' }
     }
   }
 }
@@ -70,7 +71,7 @@ const hotplace = () => {
     if (status === 200) {
       ctx.body = { code: 0, data: result, msg: '' }
     } else {
-      ctx.body = { code: 0, data: null, msg: '' }
+      ctx.body = { code: -1, data: null, msg: '' }
     }
 
     // try {
@@ -95,7 +96,37 @@ const hotplace = () => {
 }
 
 const products = () => {
-  return async (ctx, next) => {}
+  return async (ctx, next) => {
+    const { keyword, type, city } = ctx.query
+    const {
+      status,
+      data: { product, more },
+    } = await axios.get('http://cp-tools.cn/search/products', {
+      params: { keyword, type, city },
+    })
+
+    if (status === 200) {
+      ctx.body = {
+        code: 0,
+        data: {
+          product,
+          more: ctx.isAuthenticated() ? more : [],
+          login: ctx.isAuthenticated(),
+        },
+        msg: '',
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        data: {
+          product: {},
+          more: ctx.isAuthenticated() ? more : [],
+          login: ctx.isAuthenticated(),
+        },
+        msg: '',
+      }
+    }
+  }
 }
 
 const getProductDetail = () => {
