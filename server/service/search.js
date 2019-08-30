@@ -129,14 +129,9 @@ const products = () => {
   }
 }
 
-const getProductDetail = () => {
-  return async (ctx, next) => {}
-}
-
 module.exports = {
   top,
   resultsByKeywords,
   hotplace,
   products,
-  getProductDetail,
 }

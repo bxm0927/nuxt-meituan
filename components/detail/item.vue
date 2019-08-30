@@ -39,25 +39,17 @@ export default {
       const randomId = Math.random()
         .toString()
         .slice(3, 9)
-
-      const {
-        status,
-        data: { code, id },
-      } = await this.$axios.post('/cart/create', {
-        params: {
-          id: randomId,
-          detail: {
-            name: this.meta.name,
-            price: this.meta.biz_ext.cost,
-            imgs: this.meta.photos,
-          },
+      const { status, data } = await this.$axios.post('/cart/create', {
+        id: randomId,
+        detail: {
+          name: this.meta.name,
+          price: this.meta.biz_ext.cost,
+          imgs: this.meta.photos,
         },
       })
 
-      if (status === 200 && code === 0) {
-        window.location.href = `/cart/?id=${id}`
-      } else {
-        // console.log('error')
+      if (status === 200 && data.code === 0) {
+        window.location.href = `/cart?id=${data.data}`
       }
     },
   },
